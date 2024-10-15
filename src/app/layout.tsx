@@ -29,6 +29,7 @@ function ThemedLayout({ children }: { children: React.ReactNode }) {
     <html lang="en" className={`scroll-smooth ${theme}`}>
       <head>
         <title>Daniel - Developer</title>
+        <link rel="icon" href="/assets/images/favicon.png" />
       </head>
       <body className={`${inter.className} min-h-screen`}>
         <StarfieldBackground />
