@@ -59,8 +59,10 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
     >
       <div
-        className={`absolute inset-0 ${
-          scrolled ? "bg-background/90 backdrop-blur-3xl " : "bg-transparent "
+        className={`absolute inset-0  ${
+          scrolled
+            ? " bg-background/90 backdrop-blur-3xl border-neutral-700/80 rounded-full shadow-lg "
+            : "bg-transparent  "
         } transition-all duration-300`}
       ></div>
       <div className="container mx-auto px-4 relative z-10">

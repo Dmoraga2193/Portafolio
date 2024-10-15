@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, ReactNode } from "react";
-import { motion } from "framer-motion";
+import { useState, ReactNode, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { User, GraduationCap, Briefcase } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -35,10 +36,10 @@ export default function SobreMi() {
   };
 
   return (
-    <section id="sobremi" className="py-20 ">
+    <section id="sobremi" className="py-20">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-4xl font-bold mb-12 text-center "
+          className="text-4xl font-bold mb-12 text-center"
           initial="hidden"
           animate="visible"
           variants={fadeIn}
@@ -61,7 +62,7 @@ export default function SobreMi() {
                 <AvatarFallback>DM</AvatarFallback>
               </Avatar>
             </motion.div>
-            <Card className="mt-8 transition-all duration-300 hover:shadow-lg bg-white/10 backdrop-blur-md">
+            <Card className="mt-8 transition-all duration-300 hover:shadow-lg  backdrop-blur-sm">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   <User className="mr-2 text-primary" />
@@ -145,33 +146,80 @@ function Timeline({ items, icon }: TimelineProps) {
   return (
     <div className="space-y-8">
       {items.map((item, index) => (
-        <motion.div
+        <TimelineItem
           key={index}
-          className="flex"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
-        >
-          <div className="mr-4 relative">
-            <div className="bg-primary text-primary-foreground rounded-full p-2">
-              {icon}
-            </div>
-            {index !== items.length - 1 && (
-              <div className="absolute top-10 bottom-0 left-1/2 w-0.5 bg-primary/20 transform -translate-x-1/2"></div>
-            )}
-          </div>
-          <div className="flex-1">
-            <h4 className="text-lg font-semibold">{item.title}</h4>
-            <p className="text-muted-foreground">
-              {"institution" in item ? item.institution : item.company}
-            </p>
-            {item.period && (
-              <p className="text-sm text-muted-foreground">{item.period}</p>
-            )}
-          </div>
-        </motion.div>
+          item={item}
+          icon={icon}
+          index={index}
+          isLast={index === items.length - 1}
+        />
       ))}
     </div>
+  );
+}
+
+function TimelineItem({
+  item,
+  icon,
+  index,
+  isLast,
+}: {
+  item: TimelineItem;
+  icon: ReactNode;
+  index: number;
+  isLast: boolean;
+}) {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  return (
+    <motion.div
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={{
+        visible: { opacity: 1, x: 0 },
+        hidden: { opacity: 0, x: -50 },
+      }}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+      className="flex"
+    >
+      <div className="mr-4 relative">
+        <motion.div
+          className="bg-primary text-primary-foreground rounded-full p-2"
+          whileHover={{ scale: 1.2, rotate: 360 }}
+          transition={{ duration: 0.3 }}
+        >
+          {icon}
+        </motion.div>
+        {!isLast && (
+          <motion.div
+            className="absolute top-10 bottom-0 left-1/2 w-0.5 bg-primary/20 transform -translate-x-1/2"
+            initial={{ height: 0 }}
+            animate={{ height: "100%" }}
+            transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
+          />
+        )}
+      </div>
+      <div className="flex-1">
+        <h4 className="text-lg font-semibold">{item.title}</h4>
+        <p className="text-muted-foreground">
+          {"institution" in item ? item.institution : item.company}
+        </p>
+        {item.period && (
+          <p className="text-sm text-muted-foreground">{item.period}</p>
+        )}
+      </div>
+    </motion.div>
   );
 }
 

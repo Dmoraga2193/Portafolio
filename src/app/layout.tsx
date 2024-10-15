@@ -4,6 +4,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import StarfieldBackground from "@/components/StarfieldBackground";
 import { ThemeProvider, useTheme } from "@/components/ThemeContext";
+import FloatingCounter from "@/components/FloatingCounter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ function ThemedLayout({ children }: { children: React.ReactNode }) {
       </head>
       <body className={`${inter.className} min-h-screen`}>
         <StarfieldBackground />
+        <FloatingCounter />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {children}
         </div>
