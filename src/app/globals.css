@@ -14,6 +14,54 @@ body {
 
 @layer base {
   :root {
+    /* COLOR NEON CIBERPUNK */
+    /* Modo claro */
+    --background: 260 40% 97%;
+    --foreground: 260 40% 10%;
+    --card: 260 40% 100%;
+    --card-foreground: 260 40% 10%;
+    --popover: 260 40% 100%;
+    --popover-foreground: 260 40% 10%;
+    --primary: 260 80% 50%;
+    --primary-foreground: 260 40% 100%;
+    --secondary: 230 60% 60%;
+    --secondary-foreground: 260 40% 10%;
+    --muted: 260 40% 92%;
+    --muted-foreground: 260 40% 40%;
+    --accent: 260 50% 45%;
+    --accent-foreground: 260 40% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 260 40% 100%;
+    --border: 260 40% 85%;
+    --input: 260 40% 85%;
+    --ring: 260 80% 50%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Modo oscuro */
+    --background: 260 40% 3%;
+    --foreground: 260 40% 98%;
+    --card: 260 40% 6%;
+    --card-foreground: 260 40% 98%;
+    --popover: 260 40% 6%;
+    --popover-foreground: 260 40% 98%;
+    --primary: 260 80% 50%;
+    --primary-foreground: 260 40% 3%;
+    --secondary: 230 60% 40%;
+    --secondary-foreground: 260 40% 98%;
+    --muted: 260 40% 12%;
+    --muted-foreground: 260 40% 75%;
+    --accent: 260 50% 35%;
+    --accent-foreground: 260 40% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 260 40% 98%;
+    --border: 260 40% 20%;
+    --input: 260 40% 20%;
+    --ring: 260 80% 50%;
+  }
+}
+/* :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -38,7 +86,11 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.5rem;    
+    --color-claro: 210, 16%, 98%;
+    --color-bordes: 210, 16%, 93%;
+    --color-secundario: 208, 7%, 46%;
+    --color-verde: 120, 100%, 50%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -66,7 +118,7 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
+} */
 
 @layer base {
   * {

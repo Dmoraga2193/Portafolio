@@ -73,7 +73,7 @@ export default function FloatingCounter() {
             }}
             className="mb-2"
           >
-            <ChevronRight size={24} className=" text-green-700" />
+            <ChevronRight size={24} className=" text-primary" />
           </motion.div>
           <AnimatePresence>
             {isExpanded ? (
@@ -91,11 +91,7 @@ export default function FloatingCounter() {
             ) : (
               <motion.div className="flex flex-col items-center space-y-4">
                 {updatedStats.map((stat, index) => (
-                  <stat.icon
-                    key={index}
-                    size={20}
-                    className=" text-green-700"
-                  />
+                  <stat.icon key={index} size={20} className=" text-primary" />
                 ))}
               </motion.div>
             )}
@@ -127,7 +123,7 @@ export default function FloatingCounter() {
                 expanded: { rotate: 180 },
               }}
             >
-              <ChevronRight size={24} className=" text-green-700" />
+              <ChevronRight size={24} className=" text-primary" />
             </motion.div>
           </motion.button>
           <AnimatePresence>
@@ -181,7 +177,7 @@ function StatItem({ stat, index }: { stat: StatItem; index: number }) {
       transition={{ duration: 0.3, delay: index * 0.1 }}
     >
       <div className="mr-3">
-        <stat.icon size={18} className=" text-green-700" />
+        <stat.icon size={18} className=" text-primary" />
       </div>
       <div>
         <motion.div
