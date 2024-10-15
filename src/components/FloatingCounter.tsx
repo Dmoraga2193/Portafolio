@@ -2,22 +2,57 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Clock, GitPullRequest, ChevronRight } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  GitPullRequest,
+  ChevronRight,
+  ChevronUp,
+} from "lucide-react";
 
 interface StatItem {
   icon: React.ElementType;
   value: number;
   label: string;
+  isLive?: boolean;
 }
 
 const stats: StatItem[] = [
   { icon: CheckCircle, value: 12, label: "Proyectos Completados" },
   { icon: Clock, value: 2, label: "Proyectos en Desarrollo" },
-  { icon: GitPullRequest, value: 119, label: "Contribuciones en GitHub" },
+  {
+    icon: GitPullRequest,
+    value: 0,
+    label: "Contribuciones en GitHub este año",
+    isLive: true,
+  },
 ];
 
 export default function FloatingCounter() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [githubContributions, setGithubContributions] = useState(0);
+
+  useEffect(() => {
+    const fetchGithubContributions = async () => {
+      try {
+        const response = await fetch("/api/github-contributions");
+        const data = await response.json();
+        setGithubContributions(data.contributions);
+      } catch (error) {
+        console.error("Error fetching GitHub contributions:", error);
+      }
+    };
+
+    fetchGithubContributions();
+    // Actualizar cada hora
+    const interval = setInterval(fetchGithubContributions, 3600000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const updatedStats = stats.map((stat) =>
+    stat.isLive ? { ...stat, value: githubContributions } : stat
+  );
 
   return (
     <>
@@ -55,17 +90,17 @@ export default function FloatingCounter() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {stats.map((stat, index) => (
+                {updatedStats.map((stat, index) => (
                   <StatItem key={index} stat={stat} index={index} />
                 ))}
               </motion.div>
             ) : (
               <motion.div className="flex flex-col items-center space-y-4">
-                {stats.map((stat, index) => (
+                {updatedStats.map((stat, index) => (
                   <stat.icon
                     key={index}
                     size={20}
-                    className="text-primary text-green-600"
+                    className="text-primary text-green-700"
                   />
                 ))}
               </motion.div>
@@ -110,7 +145,7 @@ export default function FloatingCounter() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                {stats.map((stat, index) => (
+                {updatedStats.map((stat, index) => (
                   <StatItem key={index} stat={stat} index={index} />
                 ))}
               </motion.div>
@@ -152,7 +187,7 @@ function StatItem({ stat, index }: { stat: StatItem; index: number }) {
       transition={{ duration: 0.3, delay: index * 0.1 }}
     >
       <div className="mr-3">
-        <stat.icon size={18} className="text-primary text-green-600" />
+        <stat.icon size={18} className="text-primary text-green-700" />
       </div>
       <div>
         <motion.div
