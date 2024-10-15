@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  CheckCircle,
-  Clock,
-  GitPullRequest,
-  ChevronRight,
-  ChevronUp,
-} from "lucide-react";
+import { CheckCircle, Clock, GitPullRequest, ChevronRight } from "lucide-react";
 
 interface StatItem {
   icon: React.ElementType;
