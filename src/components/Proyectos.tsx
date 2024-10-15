@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface Project {
@@ -42,13 +42,66 @@ const projects: Project[] = [
 ];
 
 export default function Proyectos() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextProject = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + projects.length) % projects.length
+    );
+  };
+
   return (
     <section id="proyectos" className="py-20 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-center">Proyectos</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+        <h2 className="text-3xl font-bold mb-12 text-center ">Proyectos</h2>
+        <div className="relative max-w-4xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ProjectCard project={projects[currentIndex]} />
+            </motion.div>
+          </AnimatePresence>
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 -ml-16">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={prevProject}
+              className="rounded-full"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+          </div>
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 -mr-16">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={nextProject}
+              className="rounded-full"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </Button>
+          </div>
+        </div>
+        <div className="flex justify-center mt-8">
+          {projects.map((_, index) => (
+            <motion.div
+              key={index}
+              className={`w-3 h-3 rounded-full mx-1 cursor-pointer ${
+                index === currentIndex ? "bg-primary" : "bg-secondary"
+              }`}
+              onClick={() => setCurrentIndex(index)}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            />
           ))}
         </div>
       </div>
@@ -56,62 +109,35 @@ export default function Proyectos() {
   );
 }
 
-interface ProjectCardProps {
-  project: Project;
-  index: number;
-}
-
-function ProjectCard({ project, index }: ProjectCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <Card
-        className="overflow-hidden cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-lg "
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <CardContent className="p-0">
-          <div className="relative">
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover"
-            />
-            <div
-              className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="flex flex-col items-center justify-center h-full text-white p-4">
-                <h3 className="text-xl font-semibold mb-2 text-center">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-center mb-4">
-                  {project.description}
-                </p>
-                <Button asChild variant="secondary">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center"
-                  >
-                    Ver proyecto
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-            </div>
+    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <CardContent className="p-0">
+        <div className="relative aspect-video">
+          <Image
+            src={project.image}
+            alt={project.title}
+            layout="fill"
+            objectFit="cover"
+            className="transition-transform duration-300 hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white">
+            <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+            <p className="text-sm mb-4">{project.description}</p>
+            <Button asChild variant="secondary" className="w-fit">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                Ver proyecto
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
           </div>
-        </CardContent>
-      </Card>
-    </motion.div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

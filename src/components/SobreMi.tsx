@@ -48,14 +48,19 @@ export default function SobreMi() {
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <motion.div
             className="w-full lg:w-1/3 lg:sticky lg:top-24"
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Avatar className="w-48 h-48 mx-auto ring-4 ring-primary/20 transition-all duration-300 hover:ring-primary">
-              <AvatarImage src="/assets/images/Anime.jpg" alt="Daniel M." />
-              <AvatarFallback>DM</AvatarFallback>
-            </Avatar>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            >
+              <Avatar className="w-48 h-48 mx-auto ring-4 ring-primary/20 transition-all duration-300 hover:ring-primary">
+                <AvatarImage src="/assets/images/Anime.jpg" alt="Daniel M." />
+                <AvatarFallback>DM</AvatarFallback>
+              </Avatar>
+            </motion.div>
             <Card className="mt-8 transition-all duration-300 hover:shadow-lg bg-white/10 backdrop-blur-md">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
@@ -84,11 +89,27 @@ export default function SobreMi() {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-2 mb-8">
-                <TabsTrigger value="educacion" className="text-lg">
+              <TabsList className="grid w-full grid-cols-2 mb-8 p-1 bg-muted rounded-full">
+                <TabsTrigger
+                  value="educacion"
+                  className={`text-lg rounded-full transition-all duration-300 ${
+                    activeTab === "educacion"
+                      ? "bg-background text-foreground shadow-lg"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  <GraduationCap className="mr-2 h-5 w-5" />
                   Educación
                 </TabsTrigger>
-                <TabsTrigger value="experiencia" className="text-lg">
+                <TabsTrigger
+                  value="experiencia"
+                  className={`text-lg rounded-full transition-all duration-300 ${
+                    activeTab === "experiencia"
+                      ? "bg-background text-foreground shadow-lg"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  <Briefcase className="mr-2 h-5 w-5" />
                   Experiencia
                 </TabsTrigger>
               </TabsList>
