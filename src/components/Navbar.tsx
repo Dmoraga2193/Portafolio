@@ -36,6 +36,18 @@ export default function Navbar() {
     visible: { opacity: 1, y: 0 },
   };
 
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.nav
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -72,6 +84,7 @@ export default function Navbar() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={(e) => scrollToSection(e, item.href)}
               >
                 {item.name}
                 <motion.span
@@ -130,7 +143,10 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
                         transition={{ delay: index * 0.1 }}
-                        onClick={() => setIsOpen(false)}
+                        onClick={(e) => {
+                          scrollToSection(e, item.href);
+                          setIsOpen(false);
+                        }}
                       >
                         {item.name}
                       </motion.a>
