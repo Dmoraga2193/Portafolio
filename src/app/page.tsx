@@ -16,7 +16,7 @@ export default function Portfolio() {
           <Navbar />
         </header>
 
-        <main className="">
+        <main className="container mx-auto">
           <Hero />
           <SobreMi />
           {/* Nueva sección de dos columnas */}

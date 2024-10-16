@@ -36,8 +36,8 @@ export default function SobreMi() {
   };
 
   return (
-    <section id="sobremi" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="sobremi" className="py-20 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative z-0">
         <motion.h2
           className="text-4xl font-bold mb-12 text-center"
           initial="hidden"
@@ -62,7 +62,7 @@ export default function SobreMi() {
                 <AvatarFallback>DM</AvatarFallback>
               </Avatar>
             </motion.div>
-            <Card className="mt-8 transition-all duration-300 hover:shadow-lg  backdrop-blur-sm">
+            <Card className="mt-8 transition-all duration-300 hover:shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   <User className="mr-2 text-primary" />
@@ -90,12 +90,12 @@ export default function SobreMi() {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-2 mb-8 p-1 bg-muted rounded-full">
+              <TabsList className="grid w-full grid-cols-2 mb-8 p-1 bg-white/10 backdrop-blur-md rounded-full">
                 <TabsTrigger
                   value="educacion"
                   className={`text-lg rounded-full transition-all duration-300 ${
                     activeTab === "educacion"
-                      ? "bg-background text-foreground shadow-lg"
+                      ? "bg-primary text-primary-foreground shadow-lg"
                       : "text-muted-foreground"
                   }`}
                 >
@@ -106,7 +106,7 @@ export default function SobreMi() {
                   value="experiencia"
                   className={`text-lg rounded-full transition-all duration-300 ${
                     activeTab === "experiencia"
-                      ? "bg-background text-foreground shadow-lg"
+                      ? "bg-primary text-primary-foreground shadow-lg"
                       : "text-muted-foreground"
                   }`}
                 >
@@ -115,7 +115,7 @@ export default function SobreMi() {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="educacion">
-                <Card className="bg-white/10 backdrop-blur-md">
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                   <CardContent className="pt-6">
                     <Timeline
                       items={educationItems}
@@ -125,7 +125,7 @@ export default function SobreMi() {
                 </Card>
               </TabsContent>
               <TabsContent value="experiencia">
-                <Card className="bg-white/10 backdrop-blur-md">
+                <Card className="bg-white/10 backdrop-blur-md border border-white/20">
                   <CardContent className="pt-6">
                     <Timeline
                       items={experienceItems}
@@ -210,7 +210,7 @@ function TimelineItem({
           />
         )}
       </div>
-      <div className="flex-1">
+      <div className="flex-grow">
         <h4 className="text-lg font-semibold">{item.title}</h4>
         <p className="text-muted-foreground">
           {"institution" in item ? item.institution : item.company}
