@@ -55,9 +55,9 @@ export default function Proyectos() {
   };
 
   return (
-    <section id="proyectos" className="py-20 ">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-center ">Proyectos</h2>
+    <section id="proyectos">
+      <div className="container mx-auto px-4 py-20">
+        <h2 className="text-4xl font-bold mb-12 text-center ">Proyectos</h2>
         <div className="relative max-w-4xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div

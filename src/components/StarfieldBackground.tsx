@@ -9,7 +9,7 @@ const StarfieldBackground: React.FC = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full -z-10">
-      <Starfield starCount={5000} speedFactor={0.15} theme={theme} />
+      <Starfield starCount={2500} speedFactor={0.15} theme={theme} />
     </div>
   );
 };

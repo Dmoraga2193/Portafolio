@@ -162,7 +162,7 @@ export default function Component() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full"
+                className="w-full "
               />
               <Input
                 type="email"

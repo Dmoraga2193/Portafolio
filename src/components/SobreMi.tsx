@@ -243,7 +243,7 @@ const educationItems: EducationItem[] = [
 
 const experienceItems: ExperienceItem[] = [
   {
-    title: "Analista Programador",
+    title: "Desarrollador Web",
     company: "Ing Protec Ind",
     period: "Septiembre 2024 – Actualidad",
   },

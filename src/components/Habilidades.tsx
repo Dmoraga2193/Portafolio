@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   FaJs,
   FaReact,
@@ -51,9 +50,9 @@ export default function Habilidades() {
   }, [controls, inView]);
 
   return (
-    <section id="habilidades" className="py-20">
-      <div className="container mx-auto px-4 ">
-        <h2 className="text-3xl font-bold mb-12 text-center ">Habilidades</h2>
+    <section id="habilidades">
+      <div className="container mx-auto px-4 py-20">
+        <h2 className="text-4xl font-bold mb-12 text-center">Habilidades</h2>
         <motion.div
           ref={ref}
           animate={controls}
@@ -64,10 +63,10 @@ export default function Habilidades() {
             },
             hidden: {},
           }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         >
           {habilidades.map((habilidad) => (
-            <SkillCard key={habilidad.name} habilidad={habilidad} />
+            <SkillItem key={habilidad.name} habilidad={habilidad} />
           ))}
         </motion.div>
       </div>
@@ -75,40 +74,14 @@ export default function Habilidades() {
   );
 }
 
-interface SkillCardProps {
-  habilidad: Habilidad;
-}
-
-function SkillCard({ habilidad }: SkillCardProps) {
-  const [hovering, setHovering] = useState(false);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (hovering) {
-      const timer = setInterval(() => {
-        setCount((oldCount) => {
-          const newCount = oldCount + 1;
-          if (newCount === habilidad.level) {
-            clearInterval(timer);
-          }
-          return newCount > habilidad.level ? habilidad.level : newCount;
-        });
-      }, 20);
-      return () => clearInterval(timer);
-    } else {
-      setCount(0);
-    }
-  }, [hovering, habilidad.level]);
-
-  const circumference = 2 * Math.PI * 40; // 40 is the radius of the circle
-
+function SkillItem({ habilidad }: { habilidad: Habilidad }) {
   return (
     <motion.div
       variants={{
-        hidden: { y: 20, opacity: 0 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
-          y: 0,
           opacity: 1,
+          y: 0,
           transition: {
             type: "spring",
             damping: 12,
@@ -116,49 +89,27 @@ function SkillCard({ habilidad }: SkillCardProps) {
           },
         },
       }}
+      className="flex items-center space-x-4"
     >
-      <Card
-        className="overflow-hidden cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-lg dark:hover:shadow-primary/20"
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-      >
-        <CardContent className="p-4 flex flex-col items-center justify-center h-full">
-          <div className="relative w-24 h-24">
-            <svg className="w-24 h-24 transform -rotate-90">
-              <circle
-                cx="48"
-                cy="48"
-                r="40"
-                stroke="currentColor"
-                strokeWidth="8"
-                fill="transparent"
-                className="text-muted-foreground/20"
-              />
-              <circle
-                cx="48"
-                cy="48"
-                r="40"
-                stroke="currentColor"
-                strokeWidth="8"
-                fill="transparent"
-                strokeDasharray={circumference}
-                strokeDashoffset={circumference - (count / 100) * circumference}
-                className="text-primary transition-all duration-300"
-              />
-            </svg>
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-              <habilidad.icon
-                className="text-3xl"
-                aria-label={habilidad.name}
-              />
-            </div>
-          </div>
-          <p className="mt-2 font-semibold">{habilidad.name}</p>
-          {hovering && (
-            <p className="text-sm font-bold mt-1 text-primary">{count}%</p>
-          )}
-        </CardContent>
-      </Card>
+      <div className="w-8 h-8 flex items-center justify-center">
+        <habilidad.icon className="text-2xl text-primary dark:text-white" />
+      </div>
+      <div className="flex-grow">
+        <div className="flex justify-between items-center mb-1">
+          <span className="font-medium text-sm">{habilidad.name}</span>
+          <span className="text-xs text-muted-foreground">
+            {habilidad.level}%
+          </span>
+        </div>
+        <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-primary"
+            initial={{ width: 0 }}
+            animate={{ width: `${habilidad.level}%` }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          />
+        </div>
+      </div>
     </motion.div>
   );
 }
