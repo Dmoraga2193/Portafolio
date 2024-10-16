@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const phrases = ["Desarrollador Full Stack"];
+const phrases = ["<Desarrollador Frontend/>"];
 
 export default function Hero() {
   const [text, setText] = useState("");
