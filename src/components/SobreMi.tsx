@@ -62,7 +62,8 @@ export default function SobreMi() {
                 <AvatarFallback>DM</AvatarFallback>
               </Avatar>
             </motion.div>
-            <Card className="mt-8 transition-all duration-300 hover:shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
+
+            <Card className="mt-8  transition-all duration-300 hover:shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
               <CardContent className="pt-6">
                 <div className="flex items-center mb-4">
                   <User className="mr-2 text-primary" />

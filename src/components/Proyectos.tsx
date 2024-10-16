@@ -70,7 +70,7 @@ export default function Proyectos() {
               <ProjectCard project={projects[currentIndex]} />
             </motion.div>
           </AnimatePresence>
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 -ml-16">
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 -ml-12">
             <Button
               variant="ghost"
               size="icon"
@@ -80,7 +80,7 @@ export default function Proyectos() {
               <ChevronLeft className="h-6 w-6" />
             </Button>
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 right-0 -mr-16">
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 -mr-12">
             <Button
               variant="ghost"
               size="icon"
