@@ -51,7 +51,7 @@ export default function Navbar() {
   return (
     <motion.nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "py-2" : "py-4"
+        scrolled ? "py-2  backdrop-blur-xl" : "py-4"
       }`}
       initial="hidden"
       animate="visible"
@@ -68,7 +68,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex justify-between items-center">
           <motion.div
-            className="text-2xl font-bold flex items-center space-x-2"
+            className="text-2xl font-bold  backdrop-blur-xl flex items-center space-x-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
