@@ -117,7 +117,9 @@ export default function Component() {
   return (
     <section id="contacto" className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-12 text-center">Contáctame</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20">
+          Contáctame
+        </h2>
         <div className="max-w-4xl mx-auto bg-card rounded-lg shadow-lg overflow-hidden">
           <div className="grid md:grid-cols-2">
             <div className="bg-primary p-8 text-primary-foreground">

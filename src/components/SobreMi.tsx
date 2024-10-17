@@ -39,7 +39,7 @@ export default function SobreMi() {
     <section id="sobremi" className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-0">
         <motion.h2
-          className="text-4xl font-bold mb-12 text-center"
+          className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20"
           initial="hidden"
           animate="visible"
           variants={fadeIn}
