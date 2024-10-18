@@ -46,8 +46,10 @@ export default function Hero() {
       transition={{ duration: 1 }}
     >
       <div className="text-center space-y-8">
-        <h1 className="text-4xl md:text-6xl font-bold text-shadow shadow-black/20">
-          <span className="gradient-wave-text">{text}</span>
+        <h1 className="text-4xl md:text-6xl font-bold ">
+          <span className="gradient-wave-text text-shadow shadow-black/20">
+            {text}
+          </span>
           <span className="animate-pulse text-verde">|</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-shadow shadow-black/20">

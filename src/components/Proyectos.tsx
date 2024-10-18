@@ -57,7 +57,7 @@ export default function Proyectos() {
   return (
     <section id="proyectos">
       <div className="container mx-auto px-4 py-20">
-        <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20 ">
+        <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20 dark:shadow-white/50">
           Proyectos
         </h2>
         <div className="relative max-w-4xl mx-auto">

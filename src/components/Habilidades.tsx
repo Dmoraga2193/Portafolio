@@ -52,7 +52,7 @@ export default function Habilidades() {
   return (
     <section id="habilidades">
       <div className="container mx-auto px-4 py-20">
-        <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20 ">
+        <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20 dark:shadow-white/50">
           Habilidades
         </h2>
         <motion.div
