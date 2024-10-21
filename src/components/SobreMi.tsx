@@ -72,10 +72,10 @@ export default function SobreMi() {
                   </h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Hola, me llamo Daniel, apasionado a la programación hace 1
-                  año. Me encanta crear soluciones innovadoras y aprender nuevas
-                  tecnologías. Cuando no estoy programando, me puedes encontrar
-                  jugando o paseando en bicicleta.
+                  Hola, me llamo Daniel, apasionado a la programación hace 3
+                  años. Me encanta crear soluciones innovadoras y aprender
+                  nuevas tecnologías. Cuando no estoy programando, me puedes
+                  encontrar jugando o paseando en bicicleta.
                 </p>
               </CardContent>
             </Card>
