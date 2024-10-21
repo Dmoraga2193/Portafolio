@@ -113,7 +113,7 @@ export default function ContactFormV2() {
   };
 
   return (
-    <section className="py-20 ">
+    <section id="contacto" className="py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-12 text-center text-shadow shadow-black/20 dark:shadow-white/50">
           Contáctame
